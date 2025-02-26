@@ -2,7 +2,6 @@ package com.example.template.infrastructure.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,18 +14,16 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/weather")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService service;
 
     private final UserControllerMapper mapper;
 
-    @PostMapping("/{stationCode}")
-    public ResponseEntity<UserResponse> save(@PathVariable String stationCode,
-            @RequestBody @Validated UserRequest request) {
-        return ResponseEntity.ok()
-                .body(mapper.toResponse(service.save(mapper.toModel(request))));
+    @PostMapping
+    public ResponseEntity<UserResponse> save(@RequestBody @Validated UserRequest request) {
+        return ResponseEntity.ok().body(mapper.toResponse(service.save(mapper.toModel(request))));
     }
 
 }
